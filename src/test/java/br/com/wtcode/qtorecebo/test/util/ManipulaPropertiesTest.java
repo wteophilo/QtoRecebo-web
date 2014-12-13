@@ -2,6 +2,8 @@ package br.com.wtcode.qtorecebo.test.util;
 
 import static org.junit.Assert.*;
 
+import java.math.BigDecimal;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -11,6 +13,7 @@ public class ManipulaPropertiesTest {
 	private String aliquotaMinimaInss;
 	private String aliquotaMinimaIrrf;
 	private ManipulaProperties manipula;
+	private BigDecimal inss;
 	
 	@Before
 	public void setUp(){
@@ -21,14 +24,14 @@ public class ManipulaPropertiesTest {
 
 	@Test
 	public void buscaAliquotaMinimaInss() {
-		String inss = manipula.buscaAliquota(aliquotaMinimaInss);
-		assertEquals("0.08", inss);
+		inss = manipula.buscaAliquota(aliquotaMinimaInss);
+		assertEquals(new BigDecimal("0.08"), inss);
 	}
 	
 	@Test
 	public void buscaAliquotaMinimaIrrf() {
-		String inss = manipula.buscaAliquota(aliquotaMinimaIrrf);
-		assertEquals("0.075", inss);
+		inss = manipula.buscaAliquota(aliquotaMinimaIrrf);
+		assertEquals(new BigDecimal("0.075"), inss);
 	}
 
 }
