@@ -19,8 +19,6 @@
 				<h2>Insira os dados abaixo:</h2><br /> 
 				<label for="salarioBruto">Salário Bruto</label><br /> 
 				<input  name = "salario.bruto" type="text" class="form-control" id="salario"  value="${salario.bruto}" /><br /><br/> 
-				<label for="numDesconto">Número Dependentes</label><br /> 
-				<input type="text" class="form-control" name ="salario.numeroDeDependentes" id="numDependentes" value="${salario.numeroDeDependentes}" /><br/><br/>
 				<input type="submit" value="Calcular"  styleClass="btn btn-primary" />
 			</div>
 			<div id="resultado">
@@ -28,8 +26,12 @@
 				
 				<div id ="inss">
 					Porcentagem Inss: ${inss.porcentagem}<br/>
-					Valor Desconto Ins: ${inss.desconto}
+					Valor Desconto Inss: ${inss.desconto}
+				</div>
 				
+				<div id = "irrf">
+					Porcentagem Irrf: ${irrf.porcentagem}<br/>
+					Valor Desconto Irrf: ${irrf.desconto}
 				</div>
 			
 			</div>

@@ -3,18 +3,13 @@ package br.com.wtcode.qtorecebo.model;
 import java.math.BigDecimal;
 
 import br.com.wtcode.qtorecebo.util.Calculadora;
-import br.com.wtcode.qtorecebo.util.ManipulaProperties;
 
-public class Inss implements Desconto {
-	private Salario salario;
-	private ManipulaProperties manipulaProperties;
-	private BigDecimal porcentagem;
-	private BigDecimal desconto;
+public class Inss extends Desconto {
+
 	public final static BigDecimal LIMITE = new BigDecimal("482.93");
-
+	
 	public Inss(Salario salario) {
-		this.salario = salario;
-		this.manipulaProperties = new ManipulaProperties();
+		super(salario);
 	}
 
 	@Override
@@ -46,13 +41,9 @@ public class Inss implements Desconto {
 			return Calculadora.mult(salario.getBruto(), porcentagem);
 		}
 	}
-
-	public BigDecimal getPorcentagem() {
-		return porcentagem;
+	
+	@Override
+	public String toString() {
+		return "Desconto: " + this.desconto + "Porcetagem: " +this.porcentagem;
 	}
-
-	public BigDecimal getDesconto() {
-		return desconto;
-	}
-
 }
