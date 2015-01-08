@@ -2,7 +2,11 @@ package br.com.wtcode.qtorecebo.model;
 
 import java.math.BigDecimal;
 
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.NotNull;
+
 public class Salario {
+	@NotNull @DecimalMin("0.0")
 	private BigDecimal bruto;
 	private Integer numeroDeDependentes;
 	private BigDecimal liquido;
@@ -13,8 +17,7 @@ public class Salario {
 	public Salario(BigDecimal bruto) {
 		this.bruto = bruto;
 	}
-	
-	
+		
 	public BigDecimal getBruto() {
 		return bruto;
 	}

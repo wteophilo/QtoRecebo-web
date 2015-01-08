@@ -10,30 +10,35 @@
 
 </head>
 <body>
-	<c:if test="${not empty mensagem}">
-		<p class="mensagem">${mensagem}</p>
-	</c:if>
+	<div id="erros">
+		<ul>
+			<c:forEach items="${errors}" var="error">
+				<li>${error.category }- ${error.message }</li>
+			</c:forEach>
+		</ul>
+	</div>
 	<div>
 		<form method="post" action="${linkTo[SalarioController].calcula}">
 			<div id="dados">
-				<h2>Insira os dados abaixo:</h2><br /> 
-				<label for="salarioBruto">Salário Bruto</label><br /> 
-				<input  name = "salario.bruto" type="text" class="form-control" id="salario"  value="${salario.bruto}" /><br /><br/> 
-				<input type="submit" value="Calcular"  styleClass="btn btn-primary" />
+				<h2>Insira os dados abaixo:</h2>
+				<br /> <label for="salarioBruto">Salário Bruto</label><br /> <input
+					name="salario.bruto" type="text" class="form-control" id="salario"
+					value="${salario.bruto}" /><br /> <br /> <input type="submit"
+					value="Calcular" styleClass="btn btn-primary" />
 			</div>
 			<div id="resultado">
 				Salário Liquido: ${salario.liquido}
-				
-				<div id ="inss">
-					Porcentagem Inss: ${inss.porcentagem}<br/>
-					Valor Desconto Inss: ${inss.desconto}
+
+				<div id="inss">
+					Porcentagem Inss: ${inss.porcentagem}<br /> Valor Desconto Inss:
+					${inss.desconto}
 				</div>
-				
-				<div id = "irrf">
-					Porcentagem Irrf: ${irrf.porcentagem}<br/>
-					Valor Desconto Irrf: ${irrf.desconto}
+
+				<div id="irrf">
+					Porcentagem Irrf: ${irrf.porcentagem}<br /> Valor Desconto Irrf:
+					${irrf.desconto}
 				</div>
-			
+
 			</div>
 		</form>
 	</div>
