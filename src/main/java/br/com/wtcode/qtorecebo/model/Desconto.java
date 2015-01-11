@@ -6,7 +6,7 @@ import br.com.wtcode.qtorecebo.util.ManipulaProperties;
 
 public abstract  class Desconto {
 	protected  BigDecimal desconto;
-	protected  BigDecimal porcentagem;
+	private  BigDecimal porcentagem;
 	protected Salario salario;
 	protected ManipulaProperties manipulaProperties;
 	
@@ -26,5 +26,10 @@ public abstract  class Desconto {
 	
 	public BigDecimal getPorcentagem() {
 		return porcentagem;
+	}
+
+
+	public void setPorcentagem(BigDecimal porcentagem) {
+		this.porcentagem = porcentagem;
 	}
 }

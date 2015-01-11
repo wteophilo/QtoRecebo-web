@@ -29,21 +29,21 @@ public class Inss extends Desconto {
 
 	@Override
 	public BigDecimal calculaValorDesconto() {
-		porcentagem = calculaPorcentagem();
-		desconto = calculaLimite(porcentagem);
+		setPorcentagem(calculaPorcentagem());
+		desconto = calculaLimite(getPorcentagem());
 		return Calculadora.sub(salario.getBruto(), desconto);
 	}
 
 	private BigDecimal calculaLimite(BigDecimal porcentagem2) {
-		if (porcentagem.compareTo(LIMITE) == 0) {
+		if (getPorcentagem().compareTo(LIMITE) == 0) {
 			return LIMITE;
 		} else {
-			return Calculadora.mult(salario.getBruto(), porcentagem);
+			return Calculadora.mult(salario.getBruto(), getPorcentagem());
 		}
 	}
 	
 	@Override
 	public String toString() {
-		return "Desconto: " + this.desconto + "Porcetagem: " +this.porcentagem;
+		return "Desconto: " + this.desconto + "Porcetagem: " +this.getPorcentagem();
 	}
 }

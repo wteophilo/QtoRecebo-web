@@ -1,11 +1,8 @@
 <html>
 <head>
-<title>VRaptor Scaffold Project</title>
+<title>QtoRecebo - Bem vindo</title>
 </head>
 <body>
-	<script type="text/javascript" src="js/jquery.js"></script>
-	<script type="text/javascript" src="js/jquery-ui.js"></script>
-	
 	<div class="jumbotron">
 			<div class="text-center">
 				<img src="<c:url value="/images/emconstrucao.png"/>" />

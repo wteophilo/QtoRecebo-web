@@ -31,16 +31,16 @@ public class Irrf  extends Desconto{
 
 	@Override
 	public BigDecimal calculaValorDesconto() {
-		porcentagem = calculaPorcentagem();
-		desconto = Calculadora.mult(salario.getLiquido(), porcentagem);
-		desconto = Calculadora.sub(desconto, tabelaDescontoIrrf.buscaParcelaDeducaoDoImposto(porcentagem));
+		setPorcentagem(calculaPorcentagem());
+		desconto = Calculadora.mult(salario.getLiquido(), getPorcentagem());
+		desconto = Calculadora.sub(desconto, tabelaDescontoIrrf.buscaParcelaDeducaoDoImposto(getPorcentagem()));
 		if(desconto.compareTo(new BigDecimal("1")) < 0) desconto =  new BigDecimal("0.00");
 		return  Calculadora.sub(salario.getLiquido(), desconto);
 	}
 	
 	@Override
 	public String toString() {
-		return "Desconto: " + this.desconto + "Porcetagem: " +this.porcentagem;
+		return "Desconto: " + this.desconto + "Porcetagem: " +this.getPorcentagem();
 	}
 
 }

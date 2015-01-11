@@ -1,5 +1,7 @@
 package br.com.wtcode.qtorecebo.controller;
 
+import java.math.BigDecimal;
+
 import br.com.caelum.vraptor.Resource;
 import br.com.caelum.vraptor.Result;
 import br.com.caelum.vraptor.Validator;
@@ -13,6 +15,8 @@ public class SalarioController {
 
 	private Result result;
 	private Validator validator;
+	private Desconto inss;
+	private Desconto irrf;
 
 	public SalarioController(Result result, Validator validator) {
 		this.result = result;
@@ -22,20 +26,36 @@ public class SalarioController {
 	public void formulario() {}
 
 	public void calcula(final Salario salario) {
-		validator.validate(salario);
-		validator.onErrorRedirectTo(this).formulario();
-		
-		Desconto inss = new Inss(salario);
-		salario.setLiquido(inss.calculaValorDesconto());
-		Desconto irrf = new Irrf(salario);
-		salario.setLiquido(irrf.calculaValorDesconto());
-		incluiDadosPagina(salario, inss, irrf);
+		this.validator.validate(salario);
+		this.validator.onErrorRedirectTo(this).formulario();
+		this.inss = calculaInss(salario);
+		this.irrf = calculaIrrf(salario);
+		incluiDadosPagina(salario);
 	}
 
-	private void incluiDadosPagina(Salario salario, Desconto inss, Desconto irrf) {
+	private Desconto calculaIrrf(final Salario salario) {
+		Desconto irrf = new Irrf(salario);
+		salario.setLiquido(irrf.calculaValorDesconto());
+		irrf = alteraPorcetagem(irrf);
+		return irrf;
+	}
+
+	private Desconto calculaInss(final Salario salario) {
+		Desconto inss = new Inss(salario);
+		salario.setLiquido(inss.calculaValorDesconto());
+		inss = alteraPorcetagem(inss);
+		return inss;
+	}
+	
+	private Desconto alteraPorcetagem(Desconto desconto){
+		desconto.setPorcentagem(desconto.getPorcentagem().multiply(new BigDecimal("100")));
+		return desconto;
+	}
+
+	private void incluiDadosPagina(Salario salario) {
 		result.include(salario);
-		result.include(inss);
-		result.include(irrf);
+		result.include(this.inss);
+		result.include(this.irrf);
 		result.of(this).formulario();
 	}
 }
