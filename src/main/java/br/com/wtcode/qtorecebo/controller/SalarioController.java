@@ -6,6 +6,7 @@ import br.com.caelum.vraptor.Resource;
 import br.com.caelum.vraptor.Result;
 import br.com.caelum.vraptor.Validator;
 import br.com.wtcode.qtorecebo.model.Desconto;
+import br.com.wtcode.qtorecebo.model.DescontoDependente;
 import br.com.wtcode.qtorecebo.model.Inss;
 import br.com.wtcode.qtorecebo.model.Irrf;
 import br.com.wtcode.qtorecebo.model.Salario;
@@ -25,12 +26,17 @@ public class SalarioController {
 
 	public void formulario() {}
 
-	public void calcula(final Salario salario) {
+	public void calcula(Salario salario) {
 		this.validator.validate(salario);
 		this.validator.onErrorRedirectTo(this).formulario();
 		this.inss = calculaInss(salario);
+		salario = calculaDescontoDependentes(salario);
 		this.irrf = calculaIrrf(salario);
 		incluiDadosPagina(salario);
+	}
+
+	private Salario calculaDescontoDependentes(Salario salario) {
+		return new DescontoDependente().calculaDesconto(salario);
 	}
 
 	private Desconto calculaIrrf(final Salario salario) {

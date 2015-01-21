@@ -31,6 +31,13 @@
 						</div>
 					</div>
 					<div class="form-group">
+						<label for="numDesconto">Número Dependentes</label>
+						<input name="salario.numeroDeDependentes" type="text" class="form-control"
+								id="salario" value="${salario.numeroDeDependentes}" /><br /> <br />
+					</div>
+				
+					
+					<div class="form-group">
 						<div class="input-group">
 							<input type="submit" value="Calcular" class="btn btn-primary" />
 						</div>

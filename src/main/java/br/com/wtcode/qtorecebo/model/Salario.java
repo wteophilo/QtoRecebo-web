@@ -8,6 +8,7 @@ import javax.validation.constraints.NotNull;
 public class Salario {
 	@NotNull @DecimalMin("0.0")
 	private BigDecimal bruto;
+	@NotNull @DecimalMin("0")
 	private Integer numeroDeDependentes;
 	private BigDecimal liquido;
 
@@ -40,6 +41,12 @@ public class Salario {
 
 	public void setLiquido(BigDecimal liquido) {
 		this.liquido = liquido;
+	}
+
+	@Override
+	public String toString() {
+		return "Salario [bruto=" + bruto + ", numeroDeDependentes="
+				+ numeroDeDependentes + ", liquido=" + liquido + "]";
 	}
 
 }
