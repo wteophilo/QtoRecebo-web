@@ -10,6 +10,7 @@ import br.com.wtcode.qtorecebo.model.DescontoDependente;
 import br.com.wtcode.qtorecebo.model.Inss;
 import br.com.wtcode.qtorecebo.model.Irrf;
 import br.com.wtcode.qtorecebo.model.Salario;
+import br.com.wtcode.qtorecebo.model.Transporte;
 
 @Resource
 public class SalarioController {
@@ -18,6 +19,7 @@ public class SalarioController {
 	private Validator validator;
 	private Desconto inss;
 	private Desconto irrf;
+	private Desconto transporte;
 
 	public SalarioController(Result result, Validator validator) {
 		this.result = result;
@@ -26,33 +28,28 @@ public class SalarioController {
 
 	public void formulario() {}
 
-	public void calcula(Salario salario) {
+	public void calcula(Salario salario,boolean trans) {
 		this.validator.validate(salario);
 		this.validator.onErrorRedirectTo(this).formulario();
-		this.inss = calculaInss(salario);
+		this.inss = calculaDesconto(salario, new Inss(salario));
 		salario = calculaDescontoDependentes(salario);
-		this.irrf = calculaIrrf(salario);
+		this.irrf = calculaDesconto(salario, new Irrf(salario));
+		if (trans){
+			this.transporte = calculaDesconto(salario, new Transporte(salario));
+		}
 		incluiDadosPagina(salario);
 	}
 
 	private Salario calculaDescontoDependentes(Salario salario) {
 		return new DescontoDependente().calculaDesconto(salario);
 	}
-
-	private Desconto calculaIrrf(final Salario salario) {
-		Desconto irrf = new Irrf(salario);
-		salario.setLiquido(irrf.calculaValorDesconto());
-		irrf = alteraPorcetagem(irrf);
-		return irrf;
-	}
-
-	private Desconto calculaInss(final Salario salario) {
-		Desconto inss = new Inss(salario);
-		salario.setLiquido(inss.calculaValorDesconto());
-		inss = alteraPorcetagem(inss);
-		return inss;
-	}
 	
+	private Desconto calculaDesconto(Salario salario, Desconto desconto){
+		salario.setLiquido(desconto.calculaValorDesconto());
+		desconto = alteraPorcetagem(desconto);
+		return desconto;
+	}
+
 	private Desconto alteraPorcetagem(Desconto desconto){
 		desconto.setPorcentagem(desconto.getPorcentagem().multiply(new BigDecimal("100")));
 		return desconto;
@@ -62,6 +59,7 @@ public class SalarioController {
 		result.include(salario);
 		result.include(this.inss);
 		result.include(this.irrf);
+		result.include(this.transporte);
 		result.of(this).formulario();
 	}
 }

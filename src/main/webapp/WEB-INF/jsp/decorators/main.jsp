@@ -14,9 +14,8 @@
     <script type="text/javascript" src="${pageContext.request.contextPath}/javascripts/jquery.min.js"></script>
     <script type="text/javascript" src="${pageContext.request.contextPath}/javascripts/application.js"></script> 
     <script type="text/javascript" src="${pageContext.request.contextPath}/javascripts/bootstrap.min.js"></script>
-    
+  
     <decorator:head/>
-    <decorator:title default="QtoRecebo"/>
   </head>
   <body>
   	<div id="topo">

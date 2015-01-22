@@ -16,7 +16,7 @@ public abstract  class Desconto {
 	}
 	
 	
-	public  abstract BigDecimal calculaPorcentagem();
+	public abstract BigDecimal calculaPorcentagem();
 	public abstract BigDecimal calculaValorDesconto();
 	
 	

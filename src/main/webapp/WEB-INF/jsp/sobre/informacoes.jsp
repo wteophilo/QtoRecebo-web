@@ -1,4 +1,4 @@
-
+<title>QtoRecebo - Sobre</title>
 <div class="row">
 	<div class="col-sm-6 col-md-6">
 		<div class="jumbotron">
@@ -18,7 +18,7 @@
 					<label for="emailRemetente">Email</label>
 					<input id = "emailRemetente" name = "remetente.emailRemetente" value = "${remetente.emailRemetente}" class="form-control" placeholder="Insira o email"/><br /> 
 					<label for="mesagem">Mensagem</label>
-					<textarea name="remetente.texto" value = "${remetente.texto}" rows="4" cols="50" class="form-control">
+					<textarea id = "mesagem" name="remetente.texto" value = "${remetente.texto}" rows="4" cols="50" class="form-control">
 					</textarea>
 				</div>
 				<div class="text-right">
